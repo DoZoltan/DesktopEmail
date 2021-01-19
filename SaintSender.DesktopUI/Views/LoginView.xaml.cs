@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,12 +20,18 @@ namespace SaintSender.DesktopUI.Views
     /// </summary>
     public partial class LoginView : Window
     {
+
+        public LoginView(INotifyPropertyChanged ViewModel)
+        {
+            InitializeComponent();
+            this.DataContext = ViewModel;
+            this.Show();
+        }
+
         public LoginView()
         {
             InitializeComponent();
         }
-
-
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
