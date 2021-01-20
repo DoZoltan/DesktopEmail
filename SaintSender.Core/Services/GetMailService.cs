@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using MailKit;
 using MailKit.Net.Imap;
-using SaintSender.Core.Interfaces;
 using SaintSender.Core.Models;
 
 namespace SaintSender.Core.Services
@@ -31,6 +30,12 @@ namespace SaintSender.Core.Services
                 throw new ArgumentException($"Failed to connect: {e}");
             }
         }
+
+        public void Disconnect()
+        {
+            _client.Disconnect(true);
+        }
+
         public bool AuthenticateIsCorrect()
         {
             if (_client != null)

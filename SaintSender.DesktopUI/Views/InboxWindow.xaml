@@ -48,7 +48,7 @@
                     <ColumnDefinition Width="5*"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="1" Grid.Row="1" Content="New e-mail"/>
+                <Button Click="NewEmail_Button" Grid.Column="1" Grid.Row="1" Content="New e-mail"/>
             </Grid>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>

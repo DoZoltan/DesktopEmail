@@ -39,11 +39,18 @@ namespace SaintSender.DesktopUI.Views
         {
             InboxWindow inboxWindow = new InboxWindow();
             inboxWindow.Show();
+            this.Close();
 
             if (!IsValidEmail(EmailTxt.Text) || PasswordTxt.Password.Length < 4)
             {
                 WrongEmailOrPW.Visibility = Visibility.Visible;
             }
+            //else
+            //{
+            //    InboxWindow inboxWindow = new InboxWindow();
+            //    inboxWindow.Show();
+            //    this.Close();                
+            //}
         }
 
         bool IsValidEmail(string email)

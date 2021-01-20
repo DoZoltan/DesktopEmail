@@ -62,6 +62,11 @@ namespace SaintSender.DesktopUI.Views
             }
         }
 
+        private void NewEmail_Button(object sender, RoutedEventArgs e)
+        {
+            NewEmailWindow newEmailWindow = new NewEmailWindow();
+            newEmailWindow.Show();
+        }
         private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             EmailWindow emailWindow = new EmailWindow();
