@@ -55,11 +55,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\IGetMailService.cs" />
+    <Compile Include="Interfaces\ISendMailService.cs" />
+    <Compile Include="Models\Email.cs" />
+    <Compile Include="Models\IncomingEmails.cs" />
+    <Compile Include="Services\GetMailService.cs" />
+    <Compile Include="Services\SendMailService.cs" />
     <Compile Include="Models\FakeModel.cs" />
     <Compile Include="Services\GreetService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Interfaces\IGreetService.cs" />
-    <Compile Include="Services\MailService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Models\ReadMe.md" />
