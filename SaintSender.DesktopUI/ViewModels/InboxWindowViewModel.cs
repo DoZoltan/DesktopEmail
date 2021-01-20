@@ -5,13 +5,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SaintSender.Core.Models;
+using SaintSender.Core.Services;
 
 namespace SaintSender.DesktopUI.ViewModels
 {
     class InboxWindowViewModel : ViewModelBase
     {
+        
+        private ObservableCollection<FakeModel> _fakeModelCollection;
+        public ObservableCollection<FakeModel> FakeModelCollection 
         private List<FakeModel> _fullEmailList;
         public List<FakeModel> FullEmailList 
+
         {
             get { return _fullEmailList; }
             private set { _fullEmailList = value; }

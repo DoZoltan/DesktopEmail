@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MailKit;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace SaintSender.Core.Interfaces
 {
     interface IGetMailService
     {
-        void GetMessage();
+        static IMailFolder GetMessage();
     }
 }

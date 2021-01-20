@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SaintSender.Core.Entities
+namespace SaintSender.Core.Models
 {
     public class EmailModel
     {
@@ -22,5 +22,7 @@ namespace SaintSender.Core.Entities
         public DateTime Date { get; set; }
         public string Read { get; set; }
         public string Subject { get; set; }
+        
     }
+
 }

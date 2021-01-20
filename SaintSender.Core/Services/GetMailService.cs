@@ -6,38 +6,85 @@ using System.Threading.Tasks;
 using MailKit;
 using MailKit.Net.Imap;
 using SaintSender.Core.Interfaces;
+using SaintSender.Core.Models;
 
 namespace SaintSender.Core.Services
 {
-    class GetMailService : IGetMailService
+    public class GetMailService : IGetMailService
     {
-		private string From = "kumkvatmailcool@gmail.com";
-		private string Password = "kumkvatmail";
-		public void GetMessage()
-		{
-			using (var client = new ImapClient())
-			{
-				client.Connect("imap.gmail.com", 993, true);
+        ImapClient _client;
+        //private string From = "kumkvatmailcool@gmail.com";
+        //private string Password = "kumkvatmail";
 
-				client.Authenticate(From, Password);
+        public void ConnectingToIMAPService(string username, string password)
+        {
+            this._client = new ImapClient();
 
-				// The Inbox folder is always available on all IMAP servers...
-				var inbox = client.Inbox;
-				inbox.Open(FolderAccess.ReadOnly);
+            try
+            {
+                _client.ServerCertificateValidationCallback = (s, c, h, e) => true;
+                _client.Connect("imap.gmail.com", 993, true);
+                _client.Authenticate(username, password);
+            }
+            catch (Exception e)
+            {
+                throw new ArgumentException($"Failed to connect: {e}");
+            }
+        }
+        public bool AuthenticateIsCorrect()
+        {
+            if (_client != null)
+            {
+                return _client.IsAuthenticated;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public async Task<List<EmailModel>> GetEmailMessagesAsync()
+        {
+            var resultEmails = new List<EmailModel>();
 
-				Console.WriteLine("Total messages: {0}", inbox.Count);
-				Console.WriteLine("Recent messages: {0}", inbox.Recent);
+            if (AuthenticateIsCorrect())
+            {
+                var inbox = _client.Inbox;
+                inbox.Open(MailKit.FolderAccess.ReadOnly);
 
-				for (int i = 0; i < inbox.Count; i++)
-				{
-					var message = inbox.GetMessage(i);
-					Console.WriteLine("Subject: {0}", message.Subject);
-					Console.WriteLine("Body: {0}", message.HtmlBody);
-					Console.WriteLine("Date: {0}", message.Date);
-				}
+                var summaries = inbox.Fetch(0, -1, MessageSummaryItems.UniqueId 
+                    | MessageSummaryItems.Size | MessageSummaryItems.Flags);
 
-				client.Disconnect(true);
-			}
-		}
-	}
+                foreach (var summary in summaries)
+                {
+                    IList<IMessageSummary> info = 
+                        inbox.Fetch(new[] { summary.UniqueId }, MessageSummaryItems.Flags 
+                        | MessageSummaryItems.GMailLabels);
+
+                    var email = await inbox.GetMessageAsync(summary.UniqueId);
+
+                    resultEmails.Add(
+                        new EmailModel(
+                            email.From.ToString(), email.Subject, email.Date.DateTime,
+                            GetEmailIsChecked(info), email.GetTextBody(MimeKit.Text.TextFormat.Plain)));
+                }
+            }
+            return resultEmails;
+        }
+
+        private string GetEmailIsChecked(IList<IMessageSummary> info)
+        {
+            string check;
+
+            if (info[0].Flags.Value.HasFlag(MessageFlags.Seen))
+            {
+                check = "checked";
+            }
+            else
+            {
+                check = "unChecked";
+            }
+
+            return check;
+        }
+    }
 }
