@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SaintSender.Core.Services;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -20,17 +21,18 @@ namespace SaintSender.DesktopUI.Views
     /// </summary>
     public partial class LoginView : Window
     {
-
         public LoginView(INotifyPropertyChanged ViewModel)
         {
             InitializeComponent();
             this.DataContext = ViewModel;
             this.Show();
+            CheckIfComputerIsOnline();
         }
 
         public LoginView()
         {
             InitializeComponent();
+            CheckIfComputerIsOnline();
         }
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
@@ -51,6 +53,20 @@ namespace SaintSender.DesktopUI.Views
             catch
             {
                 return false;
+            }
+        }
+
+        private void CheckIfComputerIsOnline()
+        {
+            if (OnlineChecker.CheckIfComputerIsOnline())
+            {
+                Online.Text = "Online";
+                Online.Background = new SolidColorBrush(Colors.LimeGreen);
+            }
+            else
+            {
+                Online.Text = "Offline";
+                Online.Background = new SolidColorBrush(Colors.Red);
             }
         }
     }

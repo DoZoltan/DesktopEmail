@@ -55,6 +55,10 @@
                    Background="LimeGreen" FontSize="18" Visibility="Hidden">
             Logged in!
         </TextBlock>
-        
+        <!--Online Checker-->
+        <TextBlock Grid.Row="6" Grid.Column="3" Grid.ColumnSpan="2" Width="54" Height="30"
+                   VerticalAlignment="Bottom" HorizontalAlignment="Right" x:Name="Online"
+                   Background="Khaki" FontSize="18">
+        </TextBlock>
     </Grid>
 </Window>
