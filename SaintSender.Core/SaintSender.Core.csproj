@@ -57,7 +57,7 @@
   <ItemGroup>
     <Compile Include="Interfaces\IGetMailService.cs" />
     <Compile Include="Interfaces\ISendMailService.cs" />
-    <Compile Include="Models\Email.cs" />
+    <Compile Include="Models\EmailModel.cs" />
     <Compile Include="Services\GetMailService.cs" />
     <Compile Include="Services\OnlineChecker.cs" />
     <Compile Include="Services\SendMailService.cs" />

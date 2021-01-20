@@ -42,7 +42,7 @@ namespace SaintSender.Core.Services
                 return false;
             }
         }
-        public async Task<List<EmailModel>> GetEmailMessagesAsync()
+        public List<EmailModel> GetEmailMessages()
         {
             var resultEmails = new List<EmailModel>();
 
@@ -60,7 +60,7 @@ namespace SaintSender.Core.Services
                         inbox.Fetch(new[] { summary.UniqueId }, MessageSummaryItems.Flags 
                         | MessageSummaryItems.GMailLabels);
 
-                    var email = await inbox.GetMessageAsync(summary.UniqueId);
+                    var email = inbox.GetMessage(summary.UniqueId);
 
                     resultEmails.Add(
                         new EmailModel(

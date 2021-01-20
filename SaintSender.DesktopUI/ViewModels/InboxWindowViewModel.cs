@@ -13,7 +13,7 @@ namespace SaintSender.DesktopUI.ViewModels
     {
         
         private ObservableCollection<FakeModel> _fakeModelCollection;
-        public ObservableCollection<FakeModel> FakeModelCollection 
+        public ObservableCollection<FakeModel> FakeModelCollection;
         private List<FakeModel> _fullEmailList;
         public List<FakeModel> FullEmailList 
 
