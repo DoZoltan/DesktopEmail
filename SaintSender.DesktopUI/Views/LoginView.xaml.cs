@@ -37,6 +37,9 @@ namespace SaintSender.DesktopUI.Views
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
+            InboxWindow inboxWindow = new InboxWindow();
+            inboxWindow.Show();
+
             if (!IsValidEmail(EmailTxt.Text) || PasswordTxt.Password.Length < 4)
             {
                 WrongEmailOrPW.Visibility = Visibility.Visible;

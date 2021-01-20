@@ -20,6 +20,8 @@ namespace SaintSender.DesktopUI.Views
     public partial class InboxWindow : Window
     {
         private ViewModels.InboxWindowViewModel InboxWindowViewModel;
+        private int ActualEmailRangeFrom = 25;
+        private int EmailStepNumber = 25;
 
         public InboxWindow()
         {
@@ -39,6 +41,24 @@ namespace SaintSender.DesktopUI.Views
             ScrollViewer scv = (ScrollViewer)sender;
             scv.ScrollToVerticalOffset(scv.VerticalOffset - e.Delta);
             e.Handled = true;
+        }
+
+        private void Previous_Click(object sender, RoutedEventArgs e)
+        {
+            InboxWindowViewModel.SetSpecificRangeOfEmails(ActualEmailRangeFrom - EmailStepNumber, ActualEmailRangeFrom);
+            if (ActualEmailRangeFrom - EmailStepNumber >= EmailStepNumber)
+            {
+                ActualEmailRangeFrom -= EmailStepNumber;
+            }
+        }
+
+        private void Next_Click(object sender, RoutedEventArgs e)
+        {
+            InboxWindowViewModel.SetSpecificRangeOfEmails(ActualEmailRangeFrom, ActualEmailRangeFrom + EmailStepNumber);
+            if (ActualEmailRangeFrom + EmailStepNumber <= InboxWindowViewModel.FullEmailList.Count)
+            {
+                ActualEmailRangeFrom += EmailStepNumber;
+            }
         }
     }
 }

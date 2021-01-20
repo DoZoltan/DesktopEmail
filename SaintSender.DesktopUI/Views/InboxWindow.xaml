@@ -100,7 +100,7 @@
             </Grid>
         </Grid>
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
-            <DataGrid Name="emailList" ItemsSource="{Binding FakeModelCollection}" AutoGenerateColumns="False">
+            <DataGrid Name="emailList" ItemsSource="{Binding ActualMailCollection}" AutoGenerateColumns="False">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Sender" Width="2*" Binding="{Binding Sender}" ElementStyle="{StaticResource GridText}" HeaderStyle="{StaticResource GridHeader}"/>
                     <DataGridTextColumn Header="Subject" Width="9*" Binding="{Binding Subject}" ElementStyle="{StaticResource GridText}" HeaderStyle="{StaticResource GridHeader}"/>
@@ -131,7 +131,7 @@
                         <ColumnDefinition Width="5*"/>
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Column="1" Grid.Row="1" Content="Previous"/>
+                    <Button Grid.Column="1" Grid.Row="1" Content="Previous" Click="Previous_Click"/>
                 </Grid>
                 <Grid Grid.Column="1">
                     <Grid.RowDefinitions>
@@ -144,7 +144,7 @@
                         <ColumnDefinition Width="5*"/>
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Column="1" Grid.Row="1" Content="Next"/>
+                    <Button Grid.Column="1" Grid.Row="1" Content="Next" Click="Next_Click"/>
                 </Grid>
             </Grid>
         </Grid>
