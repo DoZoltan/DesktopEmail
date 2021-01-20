@@ -105,6 +105,11 @@
         </Grid>
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
             <DataGrid Name="emailList" ItemsSource="{Binding ActualMailCollection}" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" CanUserResizeColumns="False">
+                <DataGrid.ItemContainerStyle>
+                    <Style TargetType="DataGridRow">
+                        <EventSetter Event="MouseDoubleClick" Handler="DataGridRow_MouseDoubleClick"/>
+                    </Style>
+                </DataGrid.ItemContainerStyle>
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Sender" Width="4*" Binding="{Binding Sender}" ElementStyle="{StaticResource GridText}" HeaderStyle="{StaticResource GridHeader}"/>
                     <DataGridTextColumn Header="Subject" Width="5*" Binding="{Binding Subject}" ElementStyle="{StaticResource GridText}" HeaderStyle="{StaticResource GridHeader}"/>

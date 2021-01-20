@@ -61,5 +61,11 @@ namespace SaintSender.DesktopUI.Views
                 ActualEmailRangeFrom += EmailStepNumber;
             }
         }
+
+        private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            EmailWindow emailWindow = new EmailWindow();
+            emailWindow.Show();
+        }
     }
 }
