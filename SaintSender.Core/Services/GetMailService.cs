@@ -10,7 +10,7 @@ using SaintSender.Core.Models;
 
 namespace SaintSender.Core.Services
 {
-    public class GetMailService : IGetMailService
+    public class GetMailService
     {
         ImapClient _client;
         //private string From = "kumkvatmailcool@gmail.com";

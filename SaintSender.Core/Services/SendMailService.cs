@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SaintSender.Core.Services
 {
-    public class SendMailService : ISendMailService
+    public class SendMailService
     {
         private string From = "kumkvatmailcool@gmail.com";
         private string Password = "kumkvatmail";
