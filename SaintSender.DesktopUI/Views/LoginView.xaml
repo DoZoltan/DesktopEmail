@@ -20,9 +20,10 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
+
         <!-- Login -->
         <TextBlock Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Margin="0 0 0 20"
                    HorizontalAlignment="Center" FontSize="64" FontFamily="Verdana">
@@ -30,7 +31,7 @@
         </TextBlock>
         <!-- E-mail -->
         <TextBlock Grid.Row="1" Grid.Column="1">
-            E-mail: 
+            E-mail:
         </TextBlock>
         <TextBox x:Name="EmailTxt" Grid.Row="1" Grid.Column="2" MinWidth="300" Margin="10 0 0 10"/>
         <!-- Password -->
@@ -44,19 +45,27 @@
                    Background="Red" FontSize="18" Visibility="Hidden">
             Wrong username or password!
         </TextBlock>
+        <!-- CheckBox -->
+        <CheckBox VerticalContentAlignment="Center" FontSize="20" 
+                  x:Name="StayLoggedIn" Grid.Row="3" Grid.Column="2" MinWidth="300" Background="{x:Null}" HorizontalAlignment="Right" Width="310" 
+                  
+                  >
+            Remember me!
+        </CheckBox>
+
         <!-- Login Button -->
-        <Button Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Padding="10 10 10 10"
+        <Button Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Padding="10 5 10 10" Margin=""
                 HorizontalAlignment="Center" x:Name="LoginButton" Click="LoginButton_Click">
             Login
         </Button>
-        
-        <TextBlock Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2"
+        <!-- Logged in text -->
+        <TextBlock Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2"
                    HorizontalAlignment="Center" x:Name="LoggedInFeedback"
                    Background="LimeGreen" FontSize="18" Visibility="Hidden">
             Logged in!
         </TextBlock>
         <!--Online Checker-->
-        <TextBlock Grid.Row="6" Grid.Column="3" Grid.ColumnSpan="2" Width="54" Height="30"
+        <TextBlock Grid.Row="7" Grid.Column="3" Grid.ColumnSpan="2" Width="54" Height="30"
                    VerticalAlignment="Bottom" HorizontalAlignment="Right" x:Name="Online"
                    Background="Khaki" FontSize="18">
         </TextBlock>

@@ -72,5 +72,13 @@ namespace SaintSender.DesktopUI.Views
             EmailWindow emailWindow = new EmailWindow();
             emailWindow.Show();
         }
+
+
+        private void LogoutBtn(object sender, RoutedEventArgs e)
+        {
+            LoginView loginView = new LoginView();
+            loginView.Show();
+            Close();
+        }
     }
 }
