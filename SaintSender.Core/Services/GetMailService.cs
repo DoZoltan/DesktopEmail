@@ -71,20 +71,9 @@ namespace SaintSender.Core.Services
             return resultEmails;
         }
 
-        private string GetEmailIsChecked(IList<IMessageSummary> info)
+        private bool GetEmailIsChecked(IList<IMessageSummary> info)
         {
-            string check;
-
-            if (info[0].Flags.Value.HasFlag(MessageFlags.Seen))
-            {
-                check = "checked";
-            }
-            else
-            {
-                check = "unChecked";
-            }
-
-            return check;
+            return (info[0].Flags.Value.HasFlag(MessageFlags.Seen));
         }
     }
 }

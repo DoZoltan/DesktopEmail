@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SaintSender.DesktopUI.Views"
         mc:Ignorable="d"
-        Title="InboxWindow" Height="450" Width="800">
+        Title="InboxWindow" Height="450" Width="1200">
     <Grid>
         <Grid.Resources>
             <Style x:Key="GridText" TargetType="{x:Type TextBlock}" >
@@ -17,6 +17,10 @@
                 <Setter Property="HorizontalAlignment" Value="Center" />
                 <Setter Property="VerticalAlignment" Value="Center" />
                 <Setter Property="FontSize" Value="16" />
+            </Style>
+            <Style x:Key="GridCheckBox" TargetType="{x:Type DataGridCell}" >
+                <Setter Property="HorizontalAlignment" Value="Center" />
+                <Setter Property="VerticalAlignment" Value="Center" />
             </Style>
         </Grid.Resources>
         <Grid.RowDefinitions>
@@ -100,12 +104,18 @@
             </Grid>
         </Grid>
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
-            <DataGrid Name="emailList" ItemsSource="{Binding ActualMailCollection}" AutoGenerateColumns="False">
+            <DataGrid Name="emailList" ItemsSource="{Binding ActualMailCollection}" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" CanUserResizeColumns="False">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Sender" Width="2*" Binding="{Binding Sender}" ElementStyle="{StaticResource GridText}" HeaderStyle="{StaticResource GridHeader}"/>
-                    <DataGridTextColumn Header="Subject" Width="9*" Binding="{Binding Subject}" ElementStyle="{StaticResource GridText}" HeaderStyle="{StaticResource GridHeader}"/>
-                    <DataGridTextColumn Header="Date" Width="2*" Binding="{Binding Date}" ElementStyle="{StaticResource GridText}" HeaderStyle="{StaticResource GridHeader}"/>
-                        <DataGridTextColumn Header="Read" Width="1*" Binding="{Binding Read}" ElementStyle="{StaticResource GridText}" HeaderStyle="{StaticResource GridHeader}"/>
+                    <DataGridTextColumn Header="Sender" Width="4*" Binding="{Binding Sender}" ElementStyle="{StaticResource GridText}" HeaderStyle="{StaticResource GridHeader}"/>
+                    <DataGridTextColumn Header="Subject" Width="5*" Binding="{Binding Subject}" ElementStyle="{StaticResource GridText}" HeaderStyle="{StaticResource GridHeader}"/>
+                    <DataGridTextColumn Header="Date" Width="3*" Binding="{Binding Date}" ElementStyle="{StaticResource GridText}" HeaderStyle="{StaticResource GridHeader}"/>
+                    <DataGridTemplateColumn Header="Read" Width="*" HeaderStyle="{StaticResource GridHeader}" CellStyle="{StaticResource GridCheckBox}">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox IsChecked="{Binding Read}" IsEnabled="False"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </ScrollViewer>

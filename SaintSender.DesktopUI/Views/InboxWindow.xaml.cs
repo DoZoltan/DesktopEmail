@@ -30,8 +30,9 @@ namespace SaintSender.DesktopUI.Views
             InitializeComponent();
             
             this.MinHeight = 450;
-            this.MinWidth = 800;
+            this.MinWidth = 1200;
             this.MaxHeight = 900;
+            this.MaxWidth = 1900;
 
             DataContext = InboxWindowViewModel;
         }
