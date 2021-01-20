@@ -33,6 +33,7 @@ namespace SaintSender.Core.Services
 					var message = inbox.GetMessage(i);
 					Console.WriteLine("Subject: {0}", message.Subject);
 					Console.WriteLine("Body: {0}", message.HtmlBody);
+					Console.WriteLine("Date: {0}", message.Date);
 				}
 
 				client.Disconnect(true);
