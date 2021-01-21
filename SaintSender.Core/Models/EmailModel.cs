@@ -22,7 +22,10 @@ namespace SaintSender.Core.Models
         public DateTime Date { get; set; }
         public bool Read { get; set; }
         public string Subject { get; set; }
-        
-    }
 
+        public override string ToString()
+        {
+            return $"Sender: {Sender}\nDate: {Date}\nSubject: {Subject}\nMessage: {Message}";
+        }
+    }
 }

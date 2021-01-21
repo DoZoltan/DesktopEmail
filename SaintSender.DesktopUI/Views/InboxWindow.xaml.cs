@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SaintSender.Core.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -67,9 +68,11 @@ namespace SaintSender.DesktopUI.Views
             NewEmailWindow newEmailWindow = new NewEmailWindow();
             newEmailWindow.Show();
         }
+
         private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            EmailWindow emailWindow = new EmailWindow();
+            EmailModel emailModel = (EmailModel)emailList.SelectedValue;
+            EmailWindow emailWindow = new EmailWindow(emailModel);
             emailWindow.Show();
         }
     }

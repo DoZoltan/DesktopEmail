@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using SaintSender.Core.Models;
 using SaintSender.DesktopUI.ViewModels;
 
 namespace SaintSender.DesktopUI.Views
@@ -22,9 +23,18 @@ namespace SaintSender.DesktopUI.Views
     public partial class NewEmailWindow : Window
     {
         NewEmailWindowViewModel newEmailWindowViewModel = new NewEmailWindowViewModel();
+        TextFillingModel textFilling = new TextFillingModel();
+
         public NewEmailWindow()
         {
             InitializeComponent();
+            DataContext = textFilling;
+        }
+
+        public NewEmailWindow(EmailModel emailModel)
+        {
+            InitializeComponent();
+            DataContext = emailModel;
         }
 
         public NewEmailWindow(INotifyPropertyChanged ViewModel)
