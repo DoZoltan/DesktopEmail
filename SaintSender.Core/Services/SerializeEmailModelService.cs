@@ -12,9 +12,9 @@ using System.Text.Json.Serialization;
 
 namespace SaintSender.Core.Services
 {
-    public class SerializeEmailModel
+    public class SerializeEmailModelService
     {
-        public SerializeEmailModel() { }
+        public SerializeEmailModelService() { }
 
         public string SerializeEmailList(List<EmailModel> emailList)
         {
@@ -24,6 +24,12 @@ namespace SaintSender.Core.Services
                 str.Append(JsonSerializer.Serialize(email) + "\n");
             }
             return Serialize(str.ToString());
+        }
+
+
+        public void DeleteSearchFile(string output = "serializedEmails.json")
+        {
+            File.Delete(output);
         }
 
         public string Serialize(string emailModel,string output = "serializedEmails.json")
