@@ -48,6 +48,11 @@ namespace SaintSender.DesktopUI.ViewModels
             //SetSpecificRangeOfEmails(0, 25);
         }
 
+        public void DeleteEmails()
+        {
+            serializeEmailModel.DeleteSearchFile();
+        }
+
         public string SaveEmails()
         {
             return serializeEmailModel.SerializeEmailList(FullEmailList);

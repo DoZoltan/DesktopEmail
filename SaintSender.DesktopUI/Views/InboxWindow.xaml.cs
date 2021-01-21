@@ -39,6 +39,14 @@ namespace SaintSender.DesktopUI.Views
             DataContext = InboxWindowViewModel;
         }
 
+        private void ForgetMe_Button(object sender, RoutedEventArgs e)
+        {
+            InboxWindowViewModel.DeleteEmails();
+            LoginView loginView = new LoginView();
+            loginView.Show();
+            this.Close();
+            
+        }
 
         private void BackUp_Button(object sender, RoutedEventArgs e)
         {
