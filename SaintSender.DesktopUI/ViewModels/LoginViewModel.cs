@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SaintSender.Core.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,8 +9,10 @@ namespace SaintSender.DesktopUI.ViewModels
 {
     public class LoginViewModel : ViewModelBase
     {
+        private CredentialService CredentialServiceObject = new CredentialService();
         private string _email;
         private string _password;
+
 
         public string Email
         {
