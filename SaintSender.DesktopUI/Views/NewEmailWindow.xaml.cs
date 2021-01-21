@@ -37,28 +37,24 @@ namespace SaintSender.DesktopUI.Views
             DataContext = emailModel;
         }
 
-        public NewEmailWindow(INotifyPropertyChanged ViewModel)
-        {
-            InitializeComponent();
-            this.DataContext = ViewModel;
-            this.Show();
-        }
-
         public void BodyText_Hide(object sender, RoutedEventArgs e)
         {
             if (Text.Text == "Text body")
                 Text.Text = "";
         }
+
         public void BodyText_Show(object sender, RoutedEventArgs e)
         {
             if (Text.Text == "")
                 Text.Text = "Text body";
         }
+
         public void SubjectText_Hide(object sender, RoutedEventArgs e)
         {
             if (Subject.Text == "Subject")
                 Subject.Text = "";
         }
+
         public void SubjectText_show(object sender, RoutedEventArgs e)
         {
             if (Subject.Text == "")
@@ -71,11 +67,13 @@ namespace SaintSender.DesktopUI.Views
                 MailingAddress.Text = "";
             WrongEmail.Visibility = Visibility.Hidden;
         }
+
         public void MailingAddresText_Show(object sender, RoutedEventArgs e)
         {
             if (MailingAddress.Text == "")
                 MailingAddress.Text = "Mailing address";
         }
+
         private void SendButton_Click(object sender, RoutedEventArgs e)
         {
             if (!IsValidEmail(MailingAddress.Text))
