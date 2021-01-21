@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -36,6 +37,41 @@ namespace SaintSender.DesktopUI.Views
 
             InboxWindowViewModel = new ViewModels.InboxWindowViewModel();
             DataContext = InboxWindowViewModel;
+            //LoadScreenWhileAsyncIsNotDone();
+        }
+
+        private void Window_ContentRendered(object sender, EventArgs e)
+        {
+            LoadScreenWhileAsyncIsNotDone();
+        }
+
+        private void LoadScreenWhileAsyncIsNotDone() 
+        {
+            while (InboxWindowViewModel.ActualMailCollection == null || InboxWindowViewModel.ActualMailCollection.Count == 0)
+            {
+                emailScroll.Visibility = Visibility.Hidden;
+                LoadScreen.Visibility = Visibility.Visible;
+
+                LoadScreenAnimator();
+                Thread.Sleep(100);
+            }
+            emailScroll.Visibility = Visibility.Visible;
+            LoadScreen.Visibility = Visibility.Hidden;
+        }
+
+        private void LoadScreenAnimator()
+        {
+            
+            if (loading.Opacity != 0)
+            {
+                loading.Opacity -= 0.1;
+            }
+            else
+            {
+                loading.Opacity = 1;
+            }
+            
+
         }
 
         private void ScrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)

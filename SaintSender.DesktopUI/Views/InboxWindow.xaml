@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SaintSender.DesktopUI.Views"
         mc:Ignorable="d"
-        Title="InboxWindow" Height="450" Width="1200">
+        Title="InboxWindow" Height="450" Width="1200"
+        ContentRendered="Window_ContentRendered">
     <Grid>
         <Grid.Resources>
             <Style x:Key="GridText" TargetType="{x:Type TextBlock}" >
@@ -103,7 +104,10 @@
                 <Button Grid.Column="1" Grid.Row="1" Content="Logout" Click="Logout_Click"/>
             </Grid>
         </Grid>
-        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
+        <Grid Grid.Row="1" Name="LoadScreen" Visibility="Visible">
+            <TextBlock Name="loading" Text="Loading" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="70"/>
+        </Grid>
+        <ScrollViewer Name="emailScroll" Grid.Row="1" VerticalScrollBarVisibility="Auto" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel" Visibility="Hidden">
             <DataGrid Name="emailList" ItemsSource="{Binding ActualMailCollection}" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" CanUserResizeColumns="False">
                 <DataGrid.ItemContainerStyle>
                     <Style TargetType="DataGridRow">
