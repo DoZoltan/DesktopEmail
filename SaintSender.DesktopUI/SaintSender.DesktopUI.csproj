@@ -73,6 +73,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModels\EmailComparer.cs" />
     <Compile Include="ViewModels\NewEmailWindowViewModel.cs" />
     <Compile Include="Views\NewEmailWindow.xaml.cs">
       <DependentUpon>NewEmailWindow.xaml</DependentUpon>

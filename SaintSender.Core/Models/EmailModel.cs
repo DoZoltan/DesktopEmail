@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace SaintSender.Core.Models
 {
+    [Serializable]
     public class EmailModel
     {
         public EmailModel(string sender, string subject, DateTime date, bool read, string message)

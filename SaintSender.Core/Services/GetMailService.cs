@@ -47,7 +47,7 @@ namespace SaintSender.Core.Services
                 return false;
             }
         }
-        public List<EmailModel> GetEmailMessages()
+        public async Task<List<EmailModel>> GetEmailMessagesAsync()
         {
             var resultEmails = new List<EmailModel>();
 
@@ -63,6 +63,35 @@ namespace SaintSender.Core.Services
                 {
                     IList<IMessageSummary> info = 
                         inbox.Fetch(new[] { summary.UniqueId }, MessageSummaryItems.Flags 
+                        | MessageSummaryItems.GMailLabels);
+
+                    var email = await inbox.GetMessageAsync(summary.UniqueId);
+
+                    resultEmails.Add(
+                        new EmailModel(
+                            email.From.ToString(), email.Subject, email.Date.DateTime,
+                            GetEmailIsChecked(info), email.GetTextBody(MimeKit.Text.TextFormat.Html)));
+                }
+            }
+            return resultEmails;
+        }
+
+        public List<EmailModel> GetEmailMessages()
+        {
+            var resultEmails = new List<EmailModel>();
+
+            if (AuthenticateIsCorrect())
+            {
+                var inbox = _client.Inbox;
+                inbox.Open(MailKit.FolderAccess.ReadOnly);
+
+                var summaries = inbox.Fetch(0, -1, MessageSummaryItems.UniqueId
+                    | MessageSummaryItems.Size | MessageSummaryItems.Flags);
+
+                foreach (var summary in summaries)
+                {
+                    IList<IMessageSummary> info =
+                        inbox.Fetch(new[] { summary.UniqueId }, MessageSummaryItems.Flags
                         | MessageSummaryItems.GMailLabels);
 
                     var email = inbox.GetMessage(summary.UniqueId);
