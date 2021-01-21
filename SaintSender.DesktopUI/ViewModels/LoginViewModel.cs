@@ -25,14 +25,27 @@ namespace SaintSender.DesktopUI.ViewModels
             }
         }
 
-        public void SignIn(TextBox emailTxt, PasswordBox passwordTxt)
+        public void SignIn(string emailTxt, string passwordTxt, CheckBox stayLoggedIn)
         {
-            if (IsValidEmail(emailTxt.Text) && passwordTxt.Password.Length >= 4)
+            if (IsValidEmail(emailTxt) && passwordTxt.Length >= 4)
             {
-                CredentialServiceObject.SaveCredentials(emailTxt.Text, passwordTxt.Password);
+                if ((bool)stayLoggedIn.IsChecked)
+                {
+                    CredentialServiceObject.SaveCredentials(emailTxt, passwordTxt);
+                }
                 InboxWindow inboxWindow = new InboxWindow();
                 inboxWindow.Show();
-            } 
+            }
+            else { throw new ArgumentException(); }
+        }
+
+        public void SignIn(string emailTxt, string passwordTxt)
+        {
+            if (IsValidEmail(emailTxt) && passwordTxt.Length >= 4)
+            {
+                InboxWindow inboxWindow = new InboxWindow();
+                inboxWindow.Show();
+            }
             else { throw new ArgumentException(); }
         }
 
@@ -63,6 +76,14 @@ namespace SaintSender.DesktopUI.ViewModels
                 output = true;
             }
             return output;
+        }
+
+        internal void SignInWithCredentials()
+        {
+            string[] credentials = CredentialServiceObject.GetSavedCredentials();
+            _email = credentials[0];
+            _password = credentials[1];
+            SignIn(Email, Password);
         }
     }
 }

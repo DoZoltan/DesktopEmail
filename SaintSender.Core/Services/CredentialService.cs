@@ -55,6 +55,7 @@ namespace SaintSender.Core.Services
                     reader.BaseStream.CopyTo(ms);
                     byte[] encrypted = ms.ToArray();
                     string decrypted = DecryptStringFromBytes_Aes(encrypted, _myAes.Key, _myAes.IV);
+                    
                     string[] cred = decrypted.Split('/');
                     return cred;
                 }

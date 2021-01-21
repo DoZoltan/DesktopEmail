@@ -23,25 +23,28 @@ namespace SaintSender.DesktopUI.Views
     public partial class LoginView : Window
     {
         LoginViewModel LoginViewModel = new LoginViewModel();
-        public LoginView(INotifyPropertyChanged ViewModel)
-        {
-            InitializeComponent();
-            this.DataContext = ViewModel;
-            this.Show();
-            CheckIfComputerIsOnline();
-        }
+
+        //public LoginView(INotifyPropertyChanged ViewModel)
+        //{
+        //    InitializeComponent();
+        //    this.DataContext = ViewModel;
+        //    this.Show();
+        //    CheckIfComputerIsOnline();
+        //}
 
         public LoginView()
         {
+            
             InitializeComponent();
             CheckIfComputerIsOnline();
         }
+
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                LoginViewModel.SignIn(EmailTxt, PasswordTxt);
+                LoginViewModel.SignIn(EmailTxt.Text, PasswordTxt.Password, StayLoggedIn);
                 this.Close();
             }
             catch (ArgumentException)
@@ -49,7 +52,6 @@ namespace SaintSender.DesktopUI.Views
                 WrongEmailOrPW.Visibility = Visibility.Visible;
             }
         }
-
 
 
         private void CheckIfComputerIsOnline()
@@ -66,5 +68,10 @@ namespace SaintSender.DesktopUI.Views
             }
         }
 
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            LoginViewModel.SignInWithCredentials();
+            this.Close();
+        }
     }
 }

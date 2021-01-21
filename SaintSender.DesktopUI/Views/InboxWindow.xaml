@@ -87,7 +87,7 @@
                     <ColumnDefinition Width="5*"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="1" Grid.Row="1" Content="Forget me"/>
+                <Button Grid.Column="1" Grid.Row="1" Content="Forget me" Click="Button_Click"/>
             </Grid>
             <Grid Grid.Column="5">
                 <Grid.RowDefinitions>
