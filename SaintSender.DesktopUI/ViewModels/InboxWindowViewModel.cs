@@ -71,7 +71,8 @@ namespace SaintSender.DesktopUI.ViewModels
             {
                 if (from > -1 && FullEmailList.Count > i)
                 {
-                   ActualMailCollection.Add(FullEmailList[i]);
+                    FullEmailList = FullEmailList.OrderByDescending(x => x.Date).ToList();
+                    ActualMailCollection.Add(FullEmailList[i]);
                 }
             }
         }
