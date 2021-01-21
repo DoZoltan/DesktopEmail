@@ -13,6 +13,7 @@ namespace SaintSender.DesktopUI.ViewModels
 {
     class InboxWindowViewModel : ViewModelBase
     {
+        private SerializeEmailModel serializeEmailModel;
         private int From = 0;
         private int To = 25;
         private bool Refresh;
@@ -34,14 +35,31 @@ namespace SaintSender.DesktopUI.ViewModels
 
         public InboxWindowViewModel()
         {
+            serializeEmailModel = new SerializeEmailModel();
             FullEmailList = new List<EmailModel>();
-            ActualMailCollection = new ObservableCollection<EmailModel>();
             getMailService = new GetMailService();
+            LoadSavedEmails();
             getMailService.ConnectingToIMAPService("kumkvatmailcool@gmail.com", "kumkvatmail");
             Refresh = true;
             Task.Run(() => GetEmailsAsync());
+            
+            
             //FullEmailList = getMailService.GetEmailMessages();
             //SetSpecificRangeOfEmails(0, 25);
+        }
+
+        public void SaveEmails()
+        {
+            serializeEmailModel.SerializeEmailList(FullEmailList);
+        }
+
+        public void LoadSavedEmails()
+        {
+            FullEmailList = serializeEmailModel.DeserializeEmails();
+            if(FullEmailList.Count > 0)
+            {
+                SetSpecificRangeOfEmails(From, To);
+            }
         }
 
         public void SetSpecificRangeOfEmails(int from, int to)
@@ -53,16 +71,14 @@ namespace SaintSender.DesktopUI.ViewModels
             {
                 if (from > -1 && FullEmailList.Count > i)
                 {
-                    var reverseList = FullEmailList;
-                    reverseList.Reverse();
-                    ActualMailCollection.Add(reverseList[i]);
+                   ActualMailCollection.Add(FullEmailList[i]);
                 }
             }
         }
 
         private async Task GetEmailsAsync()
         {
-            while (Refresh)
+            while (Refresh || OnlineChecker.CheckIfComputerIsOnline())
             {
                 var result = await Task.Run(() => getMailService.GetEmailMessagesAsync());
                 foreach (var item in from email in result
