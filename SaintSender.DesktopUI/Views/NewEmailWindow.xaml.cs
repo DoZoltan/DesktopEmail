@@ -23,12 +23,10 @@ namespace SaintSender.DesktopUI.Views
     public partial class NewEmailWindow : Window
     {
         NewEmailWindowViewModel newEmailWindowViewModel = new NewEmailWindowViewModel();
-        TextFillingModel textFilling = new TextFillingModel();
 
         public NewEmailWindow()
         {
             InitializeComponent();
-            DataContext = textFilling;
         }
 
         public NewEmailWindow(EmailModel emailModel)

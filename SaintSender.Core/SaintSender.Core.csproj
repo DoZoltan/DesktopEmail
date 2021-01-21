@@ -85,7 +85,6 @@
   <ItemGroup>
     <Compile Include="Models\EmailModel.cs" />
     <Compile Include="Services\CredentialService.cs" />
-    <Compile Include="Models\TextFillingModel.cs" />
     <Compile Include="Services\GetMailService.cs" />
     <Compile Include="Services\OnlineChecker.cs" />
     <Compile Include="Services\SendMailService.cs" />

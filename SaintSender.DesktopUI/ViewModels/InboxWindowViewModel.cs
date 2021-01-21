@@ -25,7 +25,7 @@ namespace SaintSender.DesktopUI.ViewModels
         }
 
         private ObservableCollection<EmailModel> _actualMailCollection;
-        public ObservableCollection<EmailModel> ActualMailCollection 
+        public ObservableCollection<EmailModel> ActualMailCollection
         {
             get { return _actualMailCollection; }
             set { SetProperty(ref _actualMailCollection, value); }
@@ -42,8 +42,8 @@ namespace SaintSender.DesktopUI.ViewModels
             getMailService.ConnectingToIMAPService("kumkvatmailcool@gmail.com", "kumkvatmail");
             Refresh = true;
             Task.Run(() => GetEmailsAsync());
-            
-            
+
+
             //FullEmailList = getMailService.GetEmailMessages();
             //SetSpecificRangeOfEmails(0, 25);
         }
@@ -56,7 +56,7 @@ namespace SaintSender.DesktopUI.ViewModels
         public void LoadSavedEmails()
         {
             FullEmailList = serializeEmailModel.DeserializeEmails();
-            if(FullEmailList.Count > 0)
+            if (FullEmailList.Count > 0)
             {
                 SetSpecificRangeOfEmails(From, To);
             }
@@ -79,24 +79,35 @@ namespace SaintSender.DesktopUI.ViewModels
 
         private async Task GetEmailsAsync()
         {
-            while (Refresh || OnlineChecker.CheckIfComputerIsOnline())
+            if (Refresh)
             {
-                var result = await Task.Run(() => getMailService.GetEmailMessagesAsync());
-                foreach (var item in from email in result
-                                     where FullEmailList.Contains(email, new EmailComparer()) == false
-                                     select email)
-                {
-                    FullEmailList.Add(item);
-                }
-                SetSpecificRangeOfEmails(From, To);
-                await Task.Delay(5000);
 
+                while (Refresh && OnlineChecker.CheckIfComputerIsOnline())
+                {
+
+                    FullEmailList = await Task.Run(() => getMailService.GetEmailMessagesAsync());
+
+                    //foreach (var item in from email in result
+                    //                     where FullEmailList.Contains(email, new EmailComparer()) == false
+                    //                     select email)
+                    //{
+                    //    FullEmailList.Add(item);
+                    //}
+                    SetSpecificRangeOfEmails(From, To);
+                    await Task.Delay(5000);
+                }
             }
+            else
+            {
+                getMailService.Disconnect();
+                
+            }
+
         }
 
         public void DisconnectFromGmail()
         {
-            getMailService.Disconnect();
+            Refresh = false;
         }
     }
 }

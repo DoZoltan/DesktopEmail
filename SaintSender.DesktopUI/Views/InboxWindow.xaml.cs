@@ -25,6 +25,7 @@ namespace SaintSender.DesktopUI.Views
         private ViewModels.InboxWindowViewModel InboxWindowViewModel;
         private int ActualEmailRangeFrom = 25;
         private int EmailStepNumber = 25;
+        private CredentialService CredentialServiceObject = new CredentialService();
 
         public InboxWindow()
         {
@@ -100,10 +101,17 @@ namespace SaintSender.DesktopUI.Views
 
         private void Logout_Click(object sender, RoutedEventArgs e)
         {
+            
+            InboxWindowViewModel.DisconnectFromGmail();
+            CredentialServiceObject.DeleteCredentials();
             LoginView login = new LoginView();
             login.Show();
-            InboxWindowViewModel.DisconnectFromGmail();
             this.Close();
+        }
+
+        private void ForgetMe_Click(object sender, RoutedEventArgs e)
+        {
+            CredentialServiceObject.DeleteCredentials();
         }
     }
 }

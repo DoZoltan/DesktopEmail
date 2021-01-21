@@ -33,6 +33,7 @@ namespace SaintSender.Core.Services
 
         public void Disconnect()
         {
+
             _client.Disconnect(true);
         }
 

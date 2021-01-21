@@ -55,12 +55,23 @@ namespace SaintSender.Core.Services
                     reader.BaseStream.CopyTo(ms);
                     byte[] encrypted = ms.ToArray();
                     string decrypted = DecryptStringFromBytes_Aes(encrypted, _myAes.Key, _myAes.IV);
-                    
+
                     string[] cred = decrypted.Split('/');
                     return cred;
                 }
             }
-            else { return null;  }
+            else { return null; }
+
+        }
+
+        public void DeleteCredentials()
+        {
+            IsolatedStorageFile isolatedStorage = IsolatedStorageFile.GetStore(IsolatedStorageScope.User | IsolatedStorageScope.Assembly, null, null);
+            if (isolatedStorage.FileExists("login_cred.data"))
+            {
+                isolatedStorage.DeleteFile("login_cred.data");
+
+            }
 
         }
 
@@ -144,5 +155,7 @@ namespace SaintSender.Core.Services
 
             return plaintext;
         }
+
+
     }
 }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SaintSender.DesktopUI.Views"
         mc:Ignorable="d"
-        Title="InboxWindow" Height="450" Width="1200"
+        Title="InboxWindow" Height="450" Width="1200" Background="Khaki"
         ContentRendered="Window_ContentRendered">
     <Grid>
         <Grid.Resources>
@@ -88,7 +88,7 @@
                     <ColumnDefinition Width="5*"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="1" Grid.Row="1" Content="Forget me"/>
+                <Button Grid.Column="1" Grid.Row="1" Content="Forget me" Click="ForgetMe_Click"/>
             </Grid>
             <Grid Grid.Column="5">
                 <Grid.RowDefinitions>
