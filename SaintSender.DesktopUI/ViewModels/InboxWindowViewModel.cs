@@ -48,9 +48,9 @@ namespace SaintSender.DesktopUI.ViewModels
             //SetSpecificRangeOfEmails(0, 25);
         }
 
-        public void SaveEmails()
+        public string SaveEmails()
         {
-            serializeEmailModel.SerializeEmailList(FullEmailList);
+            return serializeEmailModel.SerializeEmailList(FullEmailList);
         }
 
         public void LoadSavedEmails()

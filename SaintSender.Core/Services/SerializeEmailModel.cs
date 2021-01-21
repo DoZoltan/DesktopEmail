@@ -16,17 +16,17 @@ namespace SaintSender.Core.Services
     {
         public SerializeEmailModel() { }
 
-        public void SerializeEmailList(List<EmailModel> emailList)
+        public string SerializeEmailList(List<EmailModel> emailList)
         {
             StringBuilder str = new StringBuilder();
             foreach(var email in emailList)
             {
                 str.Append(JsonSerializer.Serialize(email) + "\n");
             }
-            Serialize(str.ToString());
+            return Serialize(str.ToString());
         }
 
-        public void Serialize(string emailModel,string output = "serializedEmails.json")
+        public string Serialize(string emailModel,string output = "serializedEmails.json")
         { 
         FileStream fs;
             if (!File.Exists(output))
@@ -40,9 +40,11 @@ namespace SaintSender.Core.Services
                 catch (Exception)
                 {
                     Console.WriteLine("can't create");
+                    return "Can't Save backup";
                 }
             }
             File.WriteAllText("serializedEmails.json", emailModel);
+            return "Success saved backup!";
         }
 
         public List<EmailModel> DeserializeEmails(string fileName = "serializedEmails.json")

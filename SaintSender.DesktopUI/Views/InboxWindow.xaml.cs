@@ -42,7 +42,7 @@ namespace SaintSender.DesktopUI.Views
 
         private void BackUp_Button(object sender, RoutedEventArgs e)
         {
-            InboxWindowViewModel.SaveEmails();
+            MessageBox.Show(InboxWindowViewModel.SaveEmails());
         }
         private void Window_ContentRendered(object sender, EventArgs e)
         {
