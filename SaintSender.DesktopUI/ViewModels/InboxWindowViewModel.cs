@@ -88,6 +88,7 @@ namespace SaintSender.DesktopUI.ViewModels
                     FullEmailList.Add(item);
                 }
                 SetSpecificRangeOfEmails(From, To);
+                SaveEmails();
                 await Task.Delay(1000);
             }
         }
