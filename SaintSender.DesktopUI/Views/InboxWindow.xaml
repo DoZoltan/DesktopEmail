@@ -62,7 +62,7 @@
                     <ColumnDefinition Width="5*"/>
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="1" Grid.Row="1" Content="Refresh"/>
+                <Button Grid.Column="1" Grid.Row="1" Content="Refresh" IsEnabled="False"/>
             </Grid>
             <Grid Grid.Column="2">
                 <Grid.RowDefinitions>
