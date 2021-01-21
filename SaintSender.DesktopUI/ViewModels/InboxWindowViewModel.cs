@@ -62,7 +62,6 @@ namespace SaintSender.DesktopUI.ViewModels
 
         private async Task GetEmailsAsync()
         {
-            int counter = 0;
             while (Refresh)
             {
                 var result = await Task.Run(() => getMailService.GetEmailMessagesAsync());
