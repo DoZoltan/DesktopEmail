@@ -7,17 +7,26 @@
         mc:Ignorable="d"
         Title="EmailWindow" Height="450" Width="800">
     <Grid>
+        <Grid.Resources>
+            <Style x:Key="BlockStyle" TargetType="TextBlock">
+                <Setter Property="TextWrapping" Value="Wrap"/>
+                <Setter Property="Margin" Value="20 7 20 7"/>
+                <Setter Property="FontSize" Value="16"/>
+            </Style>
+        </Grid.Resources>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
             <RowDefinition Height="9*"/>
             <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Text="Subject" FontSize="16"/>
-        <TextBlock Grid.Row="1" Text="Sender" FontSize="16"/>
-        <TextBlock Grid.Row="2" Text="Date" FontSize="16"/>
-        <TextBlock Grid.Row="3" Text="Body" FontSize="16"/>
+        <TextBlock Grid.Row="0" Text="{Binding Subject}" Style="{StaticResource BlockStyle}" />
+        <TextBlock Grid.Row="1" Text="{Binding Sender}" Style="{StaticResource BlockStyle}"/>
+        <TextBlock Grid.Row="2" Text="{Binding Date}" Style="{StaticResource BlockStyle}"/>
+        <ScrollViewer Grid.Row="3" VerticalScrollBarVisibility="Auto" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
+            <TextBlock Text="{Binding Message}" Style="{StaticResource BlockStyle}"/>
+        </ScrollViewer>
         <Grid Grid.Row="4">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
@@ -36,7 +45,7 @@
                     <ColumnDefinition Width="5*"/>
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="1" Grid.Row="1" Content="Back"/>
+                <Button Grid.Column="1" Grid.Row="1" Content="Back" Click="Back_Click"/>
             </Grid>
             <Grid Grid.Column="3">
                 <Grid.RowDefinitions>
@@ -49,7 +58,7 @@
                     <ColumnDefinition Width="5*"/>
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="1" Grid.Row="1" Content="Reply"/>
+                <Button Grid.Column="1" Grid.Row="1" Content="Reply" Click="Reply_Click"/>
             </Grid>
         </Grid>
     </Grid>

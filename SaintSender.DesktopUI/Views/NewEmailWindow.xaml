@@ -13,8 +13,8 @@
             <RowDefinition  Height="5*"/>
             <RowDefinition />
         </Grid.RowDefinitions>
-        <TextBox MouseEnter="MailingAddressText_Hide" MouseLeave="MailingAddresText_Show" Background="Khaki" x:Name="MailingAddress" Grid.Row="0" BorderBrush="RosyBrown" TextBlock.TextAlignment="Left" TextBlock.FontSize="24" Text="Mailing address" BorderThickness="3" Margin="0,0,-0.4,52.6" Grid.RowSpan="2"/>
-        <TextBox MouseEnter="SubjectText_Hide" MouseLeave="SubjectText_show"  Background="Khaki" x:Name="Subject" Text="Subject" BorderBrush="RosyBrown" TextBlock.FontSize="21"  BorderThickness="3" Grid.Row="1" Margin="0,0.2,-0.4,262" Grid.RowSpan="2"/>
+        <TextBox MouseEnter="MailingAddressText_Hide" MouseLeave="MailingAddresText_Show" Background="Khaki" x:Name="MailingAddress" Grid.Row="0" BorderBrush="RosyBrown" TextBlock.TextAlignment="Left" TextBlock.FontSize="24" Text="{Binding Sender}" BorderThickness="3" Margin="0,0,-0.4,52.6" Grid.RowSpan="2"/>
+        <TextBox MouseEnter="SubjectText_Hide" MouseLeave="SubjectText_show"  Background="Khaki" x:Name="Subject" Text="{Binding Subject}" BorderBrush="RosyBrown" TextBlock.FontSize="21"  BorderThickness="3" Grid.Row="1" Margin="0,0.2,-0.4,262" Grid.RowSpan="2"/>
         <TextBox MouseEnter="BodyText_Hide" MouseLeave="BodyText_Show"  Background="Khaki" x:Name="Text" BorderThickness="3" BorderBrush="RosyBrown" TextBlock.FontSize="15" TextAlignment="Left" Text="Text body" Grid.Row="2" Margin="0,0.4,-0.4,0"/>
         <Button Click="SendButton_Click" x:Name="SendButton" Grid.Row="3" Content="Send" Width="70" Height="40" HorizontalAlignment="Left" Margin="10,5,0,7"/>
         <TextBlock Grid.Row="0" Text="Wrong email adress!"

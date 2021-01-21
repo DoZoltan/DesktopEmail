@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SaintSender.Core.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,34 @@ namespace SaintSender.DesktopUI.Views
     /// </summary>
     public partial class EmailWindow : Window
     {
-        public EmailWindow()
+        private EmailModel emailModel;
+
+        public EmailWindow(EmailModel emailModel)
         {
+            this.emailModel = emailModel;
             InitializeComponent();
+            DataContext = emailModel;
+        }
+
+        private void ScrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            ScrollViewer scv = (ScrollViewer)sender;
+            scv.ScrollToVerticalOffset(scv.VerticalOffset - e.Delta);
+            e.Handled = true;
+        }
+
+        private void Back_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void Reply_Click(object sender, RoutedEventArgs e)
+        {
+            
+            NewEmailWindow newEmailWindow = new NewEmailWindow(emailModel);
+            newEmailWindow.Show();
+            this.Close();
+            
         }
     }
 }

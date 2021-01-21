@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using SaintSender.Core.Models;
 using SaintSender.DesktopUI.ViewModels;
 
 namespace SaintSender.DesktopUI.Views
@@ -22,16 +23,18 @@ namespace SaintSender.DesktopUI.Views
     public partial class NewEmailWindow : Window
     {
         NewEmailWindowViewModel newEmailWindowViewModel = new NewEmailWindowViewModel();
+        TextFillingModel textFilling = new TextFillingModel();
+
         public NewEmailWindow()
         {
             InitializeComponent();
+            DataContext = textFilling;
         }
 
-        public NewEmailWindow(INotifyPropertyChanged ViewModel)
+        public NewEmailWindow(EmailModel emailModel)
         {
             InitializeComponent();
-            this.DataContext = ViewModel;
-            this.Show();
+            DataContext = emailModel;
         }
 
         public void BodyText_Hide(object sender, RoutedEventArgs e)
@@ -39,16 +42,19 @@ namespace SaintSender.DesktopUI.Views
             if (Text.Text == "Text body")
                 Text.Text = "";
         }
+
         public void BodyText_Show(object sender, RoutedEventArgs e)
         {
             if (Text.Text == "")
                 Text.Text = "Text body";
         }
+
         public void SubjectText_Hide(object sender, RoutedEventArgs e)
         {
             if (Subject.Text == "Subject")
                 Subject.Text = "";
         }
+
         public void SubjectText_show(object sender, RoutedEventArgs e)
         {
             if (Subject.Text == "")
@@ -61,11 +67,13 @@ namespace SaintSender.DesktopUI.Views
                 MailingAddress.Text = "";
             WrongEmail.Visibility = Visibility.Hidden;
         }
+
         public void MailingAddresText_Show(object sender, RoutedEventArgs e)
         {
             if (MailingAddress.Text == "")
                 MailingAddress.Text = "Mailing address";
         }
+
         private void SendButton_Click(object sender, RoutedEventArgs e)
         {
             if (!IsValidEmail(MailingAddress.Text))
