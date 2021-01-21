@@ -70,40 +70,12 @@ namespace SaintSender.Core.Services
                     resultEmails.Add(
                         new EmailModel(
                             email.From.ToString(), email.Subject, email.Date.DateTime,
-                            GetEmailIsChecked(info), email.GetTextBody(MimeKit.Text.TextFormat.Html)));
-                }
-            }
-            return resultEmails;
-        }
-
-        public List<EmailModel> GetEmailMessages()
-        {
-            var resultEmails = new List<EmailModel>();
-
-            if (AuthenticateIsCorrect())
-            {
-                var inbox = _client.Inbox;
-                inbox.Open(MailKit.FolderAccess.ReadOnly);
-
-                var summaries = inbox.Fetch(0, -1, MessageSummaryItems.UniqueId
-                    | MessageSummaryItems.Size | MessageSummaryItems.Flags);
-
-                foreach (var summary in summaries)
-                {
-                    IList<IMessageSummary> info =
-                        inbox.Fetch(new[] { summary.UniqueId }, MessageSummaryItems.Flags
-                        | MessageSummaryItems.GMailLabels);
-
-                    var email = inbox.GetMessage(summary.UniqueId);
-
-                    resultEmails.Add(
-                        new EmailModel(
-                            email.From.ToString(), email.Subject, email.Date.DateTime,
                             GetEmailIsChecked(info), email.GetTextBody(MimeKit.Text.TextFormat.Plain)));
                 }
             }
             return resultEmails;
         }
+
 
         private bool GetEmailIsChecked(IList<IMessageSummary> info)
         {
