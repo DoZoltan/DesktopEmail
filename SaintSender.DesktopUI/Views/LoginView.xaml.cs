@@ -23,6 +23,7 @@ namespace SaintSender.DesktopUI.Views
     public partial class LoginView : Window
     {
         LoginViewModel LoginViewModel = new LoginViewModel();
+        
 
         //public LoginView(INotifyPropertyChanged ViewModel)
         //{

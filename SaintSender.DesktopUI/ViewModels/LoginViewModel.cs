@@ -14,6 +14,7 @@ namespace SaintSender.DesktopUI.ViewModels
         private CredentialService CredentialServiceObject = new CredentialService();
         private string _email;
         private string _password;
+        GetMailService mailService = new GetMailService();
 
 
         public string Email
@@ -27,13 +28,16 @@ namespace SaintSender.DesktopUI.ViewModels
 
         public void SignIn(string emailTxt, string passwordTxt, CheckBox stayLoggedIn)
         {
-            if (IsValidEmail(emailTxt) && passwordTxt.Length >= 4)
+            mailService.ConnectingToIMAPService(emailTxt, passwordTxt);
+            if (mailService.AuthenticateIsCorrect())
             {
                 if ((bool)stayLoggedIn.IsChecked)
                 {
+
                     CredentialServiceObject.SaveCredentials(emailTxt, passwordTxt);
                 }
-                InboxWindow inboxWindow = new InboxWindow();
+
+                InboxWindow inboxWindow = new InboxWindow(mailService);
                 inboxWindow.Show();
             }
             else { throw new ArgumentException(); }
@@ -41,15 +45,17 @@ namespace SaintSender.DesktopUI.ViewModels
 
         public void SignIn(string emailTxt, string passwordTxt)
         {
-            if (IsValidEmail(emailTxt) && passwordTxt.Length >= 4)
+            mailService.ConnectingToIMAPService(emailTxt, passwordTxt);
+
+            if (mailService.AuthenticateIsCorrect())
             {
-                InboxWindow inboxWindow = new InboxWindow();
+                InboxWindow inboxWindow = new InboxWindow(mailService);
                 inboxWindow.Show();
             }
             else { throw new ArgumentException(); }
         }
 
-        bool IsValidEmail(string email)
+        bool CanAuthenticate(string email)
         {
             try
             {

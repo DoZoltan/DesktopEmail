@@ -27,7 +27,7 @@ namespace SaintSender.DesktopUI.Views
         private int EmailStepNumber = 25;
         private CredentialService CredentialServiceObject = new CredentialService();
 
-        public InboxWindow()
+        public InboxWindow(GetMailService mailService)
         {
             InitializeComponent();
             
@@ -36,17 +36,17 @@ namespace SaintSender.DesktopUI.Views
             this.MaxHeight = 900;
             this.MaxWidth = 1900;
 
-            InboxWindowViewModel = new ViewModels.InboxWindowViewModel();
+            InboxWindowViewModel = new ViewModels.InboxWindowViewModel(mailService);
             DataContext = InboxWindowViewModel;
         }
 
         private void ForgetMe_Button(object sender, RoutedEventArgs e)
         {
+            CredentialServiceObject.DeleteCredentials();
             InboxWindowViewModel.DeleteEmails();
             LoginView loginView = new LoginView();
             loginView.Show();
             this.Close();
-            
         }
 
         private void BackUp_Button(object sender, RoutedEventArgs e)
@@ -115,11 +115,6 @@ namespace SaintSender.DesktopUI.Views
             LoginView login = new LoginView();
             login.Show();
             this.Close();
-        }
-
-        private void ForgetMe_Click(object sender, RoutedEventArgs e)
-        {
-            CredentialServiceObject.DeleteCredentials();
         }
     }
 }

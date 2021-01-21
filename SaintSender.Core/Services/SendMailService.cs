@@ -10,8 +10,17 @@ namespace SaintSender.Core.Services
 {
     public class SendMailService
     {
-        private string From = "kumkvatmailcool@gmail.com";
-        private string Password = "kumkvatmail";
+        CredentialService CredentialServiceObject = new CredentialService();
+        private string From;
+        private string Password;
+        public SendMailService()
+        {
+            string[] credentials = CredentialServiceObject.GetSavedCredentials();
+            From = credentials[0];
+            Password = credentials[1];
+
+        }
+
         public void SendMessage(string to, string subject, string bodyText)
         {
             MimeMessage message = new MimeMessage();

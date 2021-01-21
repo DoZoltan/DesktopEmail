@@ -33,13 +33,12 @@ namespace SaintSender.DesktopUI.ViewModels
 
         private GetMailService getMailService;
 
-        public InboxWindowViewModel()
+        public InboxWindowViewModel(GetMailService mailService)
         {
             serializeEmailModel = new SerializeEmailModelService();
             FullEmailList = new List<EmailModel>();
-            getMailService = new GetMailService();
+            getMailService = mailService;
             LoadSavedEmails();
-            getMailService.ConnectingToIMAPService("kumkvatmailcool@gmail.com", "kumkvatmail");
             Refresh = true;
             Task.Run(() => GetEmailsAsync());
 
