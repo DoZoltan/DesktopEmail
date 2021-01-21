@@ -1,4 +1,5 @@
 ﻿using SaintSender.Core.Services;
+using SaintSender.DesktopUI.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,6 +22,7 @@ namespace SaintSender.DesktopUI.Views
     /// </summary>
     public partial class LoginView : Window
     {
+        LoginViewModel LoginViewModel = new LoginViewModel();
         public LoginView(INotifyPropertyChanged ViewModel)
         {
             InitializeComponent();
@@ -37,34 +39,18 @@ namespace SaintSender.DesktopUI.Views
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            InboxWindow inboxWindow = new InboxWindow();
-            inboxWindow.Show();
-            this.Close();
-
-            if (!IsValidEmail(EmailTxt.Text) || PasswordTxt.Password.Length < 4)
+            try
+            {
+                LoginViewModel.SignIn(EmailTxt, PasswordTxt);
+                this.Close();
+            }
+            catch (ArgumentException)
             {
                 WrongEmailOrPW.Visibility = Visibility.Visible;
             }
-            //else
-            //{
-            //    InboxWindow inboxWindow = new InboxWindow();
-            //    inboxWindow.Show();
-            //    this.Close();                
-            //}
         }
 
-        bool IsValidEmail(string email)
-        {
-            try
-            {
-                var mail = new System.Net.Mail.MailAddress(email);
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
+
 
         private void CheckIfComputerIsOnline()
         {
@@ -79,5 +65,6 @@ namespace SaintSender.DesktopUI.Views
                 Online.Background = new SolidColorBrush(Colors.Red);
             }
         }
+
     }
 }

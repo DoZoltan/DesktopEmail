@@ -47,7 +47,7 @@
         </TextBlock>
         <!-- CheckBox -->
         <CheckBox VerticalContentAlignment="Center" FontSize="20" 
-                  x:Name="StayLoggedIn" Grid.Row="3" Grid.Column="2" MinWidth="300" Background="{x:Null}" HorizontalAlignment="Right" Width="310" 
+                  x:Name="StayLoggedIn" Grid.Row="4" Grid.Column="2" MinWidth="300" HorizontalAlignment="Right" Width="310" 
                   
                   >
             Remember me!
