@@ -34,7 +34,7 @@ namespace SaintSender.DesktopUI.Views
 
         public LoginView()
         {
-            
+
             InitializeComponent();
             CheckIfComputerIsOnline();
         }
@@ -70,8 +70,10 @@ namespace SaintSender.DesktopUI.Views
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            LoginViewModel.SignInWithCredentials();
-            this.Close();
+            if (LoginViewModel.SignInWithCredentials())
+            {
+                this.Close();
+            }
         }
     }
 }

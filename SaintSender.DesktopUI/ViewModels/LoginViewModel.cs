@@ -78,12 +78,17 @@ namespace SaintSender.DesktopUI.ViewModels
             return output;
         }
 
-        internal void SignInWithCredentials()
+        internal bool SignInWithCredentials()
         {
             string[] credentials = CredentialServiceObject.GetSavedCredentials();
-            _email = credentials[0];
-            _password = credentials[1];
-            SignIn(Email, Password);
+            if (credentials != null)
+            {
+                _email = credentials[0];
+                _password = credentials[1];
+                SignIn(Email, Password);
+                return true;
+            }
+            return false;
         }
     }
 }
