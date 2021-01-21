@@ -39,6 +39,11 @@ namespace SaintSender.DesktopUI.Views
             DataContext = InboxWindowViewModel;
         }
 
+
+        private void BackUp_Button(object sender, RoutedEventArgs e)
+        {
+            InboxWindowViewModel.SaveEmails();
+        }
         private void Window_ContentRendered(object sender, EventArgs e)
         {
             LoadScreenWhileAsyncIsNotDone();

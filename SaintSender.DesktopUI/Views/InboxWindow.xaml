@@ -75,7 +75,7 @@
                     <ColumnDefinition Width="5*"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="1" Grid.Row="1" Content="Backup"/>
+                <Button Click="BackUp_Button" Grid.Column="1" Grid.Row="1" Content="Backup"/>
             </Grid>
             <Grid Grid.Column="4">
                 <Grid.RowDefinitions>

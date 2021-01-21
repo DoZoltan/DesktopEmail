@@ -47,14 +47,17 @@ namespace SaintSender.Core.Services
 
         public List<EmailModel> DeserializeEmails(string fileName = "serializedEmails.json")
         {
-            List<EmailModel> emailList = new List<EmailModel>();
+                List<EmailModel> emailList = new List<EmailModel>();
             EmailModel email;
-            string[] lines = File.ReadAllLines(fileName);
-
-            foreach(var json in lines)
+            if (File.Exists(fileName))
             {
-                email = Deserialize(json);
-                emailList.Add(email);
+                string[] lines = File.ReadAllLines(fileName);
+
+                foreach (var json in lines)
+                {
+                    email = Deserialize(json);
+                    emailList.Add(email);
+                }
             }
             return emailList;
         }
