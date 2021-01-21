@@ -100,7 +100,7 @@
                     <ColumnDefinition Width="5*"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="1" Grid.Row="1" Content="Logout"/>
+                <Button Grid.Column="1" Grid.Row="1" Content="Logout" Click="Logout_Click"/>
             </Grid>
         </Grid>
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">

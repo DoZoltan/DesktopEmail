@@ -1,4 +1,5 @@
 ﻿using SaintSender.Core.Models;
+using SaintSender.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,8 +27,6 @@ namespace SaintSender.DesktopUI.Views
 
         public InboxWindow()
         {
-            InboxWindowViewModel = new ViewModels.InboxWindowViewModel();
-            
             InitializeComponent();
             
             this.MinHeight = 450;
@@ -35,6 +34,7 @@ namespace SaintSender.DesktopUI.Views
             this.MaxHeight = 900;
             this.MaxWidth = 1900;
 
+            InboxWindowViewModel = new ViewModels.InboxWindowViewModel();
             DataContext = InboxWindowViewModel;
         }
 
@@ -74,6 +74,14 @@ namespace SaintSender.DesktopUI.Views
             EmailModel emailModel = (EmailModel)emailList.SelectedValue;
             EmailWindow emailWindow = new EmailWindow(emailModel);
             emailWindow.Show();
+        }
+
+        private void Logout_Click(object sender, RoutedEventArgs e)
+        {
+            LoginView login = new LoginView();
+            login.Show();
+            InboxWindowViewModel.DisconnectFromGmail();
+            this.Close();
         }
     }
 }

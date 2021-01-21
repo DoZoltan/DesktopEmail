@@ -70,7 +70,7 @@ namespace SaintSender.Core.Services
                     resultEmails.Add(
                         new EmailModel(
                             email.From.ToString(), email.Subject, email.Date.DateTime,
-                            GetEmailIsChecked(info), email.GetTextBody(MimeKit.Text.TextFormat.Html)));
+                            GetEmailIsChecked(info), email.GetTextBody(MimeKit.Text.TextFormat.Plain)));
                 }
             }
             return resultEmails;

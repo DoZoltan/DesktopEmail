@@ -47,5 +47,10 @@ namespace SaintSender.DesktopUI.ViewModels
                 }
             }
         }
+
+        public void DisconnectFromGmail()
+        {
+            getMailService.Disconnect();
+        }
     }
 }
