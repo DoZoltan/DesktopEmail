@@ -1,4 +1,5 @@
-﻿using SaintSender.DesktopUI.Views;
+﻿using SaintSender.Core.Services;
+using SaintSender.DesktopUI.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +11,10 @@ namespace SaintSender.DesktopUI.ViewModels
 {
     public class LoginViewModel : ViewModelBase
     {
-
+        private CredentialService CredentialServiceObject = new CredentialService();
         private string _email;
         private string _password;
-        private CredentialService CredentialServiceObject = new CredentialService();
+
 
         public string Email
         {
@@ -28,7 +29,7 @@ namespace SaintSender.DesktopUI.ViewModels
         {
             if (IsValidEmail(emailTxt.Text) && passwordTxt.Password.Length >= 4)
             {
-
+                CredentialServiceObject.SaveCredentials(emailTxt.Text, passwordTxt.Password);
                 InboxWindow inboxWindow = new InboxWindow();
                 inboxWindow.Show();
             } 
