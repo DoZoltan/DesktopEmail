@@ -13,7 +13,7 @@ namespace SaintSender.DesktopUI.ViewModels
 {
     class InboxWindowViewModel : ViewModelBase
     {
-        private SerializeEmailModel serializeEmailModel;
+        private SerializeEmailModelService serializeEmailModel;
         private int From = 0;
         private int To = 25;
         private bool Refresh;
@@ -35,7 +35,7 @@ namespace SaintSender.DesktopUI.ViewModels
 
         public InboxWindowViewModel()
         {
-            serializeEmailModel = new SerializeEmailModel();
+            serializeEmailModel = new SerializeEmailModelService();
             FullEmailList = new List<EmailModel>();
             getMailService = new GetMailService();
             LoadSavedEmails();
